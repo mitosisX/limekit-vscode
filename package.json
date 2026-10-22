@@ -1,6 +1,6 @@
 {
-  "name": "limekit",
-  "displayName": "Limekit",
+  "name": "limekit-vscode",
+  "displayName": "Limekit for VS Code",
   "description": "Run Limekit desktop apps from VS Code with one click, with completion and docs for the whole Limekit Lua API.",
   "version": "0.1.0",
   "publisher": "OmegaMsiska",
@@ -126,7 +126,7 @@
     ],
     "problemMatchers": [
       {
-        "name": "limekit",
+        "name": "limekit-vscode",
         "owner": "limekit",
         "source": "Limekit",
         "fileLocation": [
