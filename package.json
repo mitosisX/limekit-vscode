@@ -1,0 +1,162 @@
+{
+  "name": "limekit",
+  "displayName": "Limekit",
+  "description": "Run Limekit desktop apps from VS Code with one click, with completion and docs for the whole Limekit Lua API.",
+  "version": "0.1.0",
+  "publisher": "navetotech",
+  "license": "GPL-3.0-only",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mitosisX/limekit-vscode"
+  },
+  "homepage": "https://limekit.readthedocs.io/",
+  "bugs": {
+    "url": "https://github.com/mitosisX/limekit-vscode/issues"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "lua",
+    "limekit",
+    "limer",
+    "gui",
+    "desktop",
+    "qt"
+  ],
+  "extensionDependencies": [
+    "sumneko.lua"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/app.json",
+    "onLanguage:lua"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "limekit.run",
+        "title": "Run App",
+        "category": "Limekit",
+        "icon": "$(play)"
+      },
+      {
+        "command": "limekit.stop",
+        "title": "Stop App",
+        "category": "Limekit",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "limekit.locateLimer",
+        "title": "Locate Limer...",
+        "category": "Limekit"
+      }
+    ],
+    "menus": {
+      "editor/title/run": [
+        {
+          "command": "limekit.run",
+          "when": "limekit.isProject && resourceLangId == lua && !limekit.running",
+          "group": "navigation@0"
+        },
+        {
+          "command": "limekit.stop",
+          "when": "limekit.isProject && resourceLangId == lua && limekit.running",
+          "group": "navigation@0"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "limekit.run",
+          "when": "limekit.isProject"
+        },
+        {
+          "command": "limekit.stop",
+          "when": "limekit.running"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "limekit.run",
+        "key": "ctrl+f5",
+        "mac": "cmd+f5",
+        "when": "limekit.isProject"
+      },
+      {
+        "command": "limekit.stop",
+        "key": "shift+f5",
+        "when": "limekit.running && !inDebugMode"
+      }
+    ],
+    "configuration": {
+      "title": "Limekit",
+      "properties": {
+        "limekit.limerPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "The folder you unzipped Limer into. Usually found on its own from the project; set it with **Limekit: Locate Limer...** if not."
+        },
+        "limekit.pythonPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "For people working on Limekit itself: a Python with Limekit installed, used when no Limer is found. App makers never need this."
+        }
+      }
+    },
+    "taskDefinitions": [
+      {
+        "type": "limekit",
+        "required": [
+          "project"
+        ],
+        "properties": {
+          "project": {
+            "type": "string",
+            "description": "The Limekit project folder to run."
+          }
+        }
+      }
+    ],
+    "problemMatchers": [
+      {
+        "name": "limekit",
+        "owner": "limekit",
+        "source": "Limekit",
+        "fileLocation": [
+          "search",
+          {
+            "include": [
+              "${workspaceFolder}"
+            ]
+          }
+        ],
+        "pattern": {
+          "regexp": "((?:scripts|[\\w.-]+)/[^\\s:]+\\.lua):(\\d+):\\s*(.*)$",
+          "file": 1,
+          "line": 2,
+          "message": 3
+        },
+        "severity": "error"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "lua",
+        "path": "./snippets/limekit.code-snippets"
+      }
+    ]
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "@vscode/test-electron": "^2.5.2"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "Limekit app": {
+    "prefix": "lk-app",
+    "description": "A complete Limekit app: a window with a label and a button.",
+    "body": [
+      "local ui = require(\"limekit.ui\")",
+      "",
+      "local window = ui.Window { title = \"${1:My App}\", size = { ${2:400}, ${3:300} } }",
+      "local layout = ui.VLayout()",
+      "",
+      "local label = ui.Label(\"${4:Hello!}\")",
+      "local button = ui.Button(\"${5:Click me}\")",
+      "",
+      "button:setOnClick(function()",
+      "    label:setText(\"${6:Clicked!}\")",
+      "end)",
+      "",
+      "layout:addChild(label)",
+      "layout:addChild(button)",
+      "window:setLayout(layout)",
+      "window:show()",
+      "$0"
+    ]
+  },
+  "require Limekit modules": {
+    "prefix": "lk-require",
+    "description": "The Limekit modules most apps use.",
+    "body": [
+      "local ui  = require(\"limekit.ui\")",
+      "local sys = require(\"limekit.sys\")",
+      "local fs  = require(\"limekit.fs\")",
+      "$0"
+    ]
+  },
+  "Window": {
+    "prefix": "lk-window",
+    "description": "A window with a vertical layout.",
+    "body": [
+      "local ${1:window} = ui.Window { title = \"${2:Title}\", size = { ${3:400}, ${4:300} } }",
+      "local ${5:layout} = ui.VLayout()",
+      "$0",
+      "${1:window}:setLayout(${5:layout})",
+      "${1:window}:show()"
+    ]
+  },
+  "Button with a click handler": {
+    "prefix": "lk-button",
+    "description": "A button and what happens when it is clicked.",
+    "body": [
+      "local ${1:button} = ui.Button(\"${2:Click me}\")",
+      "${1:button}:setOnClick(function()",
+      "    $0",
+      "end)"
+    ]
+  },
+  "Click handler": {
+    "prefix": "lk-onclick",
+    "description": "What happens when a widget is clicked.",
+    "body": [
+      "${1:button}:setOnClick(function()",
+      "    $0",
+      "end)"
+    ]
+  },
+  "Text box": {
+    "prefix": "lk-textbox",
+    "description": "A one-line text box with a hint, reacting as the text changes.",
+    "body": [
+      "local ${1:input} = ui.LineEdit()",
+      "${1:input}:setHint(\"${2:Type here...}\")",
+      "${1:input}:setOnTextChange(function(_, text)",
+      "    $0",
+      "end)"
+    ]
+  },
+  "Row of widgets": {
+    "prefix": "lk-row",
+    "description": "A horizontal layout: widgets side by side.",
+    "body": [
+      "local ${1:row} = ui.HLayout()",
+      "${1:row}:addChild(${2:widget})",
+      "$0"
+    ]
+  },
+  "Column of widgets": {
+    "prefix": "lk-column",
+    "description": "A vertical layout: widgets one under another.",
+    "body": [
+      "local ${1:column} = ui.VLayout()",
+      "${1:column}:addChild(${2:widget})",
+      "$0"
+    ]
+  },
+  "Form": {
+    "prefix": "lk-form",
+    "description": "A form: labelled fields, one per row.",
+    "body": [
+      "local ${1:form} = ui.FormLayout()",
+      "local ${2:name} = ui.LineEdit()",
+      "${1:form}:addChild(\"${3:Name}\", ${2:name})",
+      "$0"
+    ]
+  },
+  "List": {
+    "prefix": "lk-list",
+    "description": "A list box filled with items.",
+    "body": [
+      "local ${1:list} = ui.ListBox()",
+      "${1:list}:setItems({ \"${2:One}\", \"${3:Two}\", \"${4:Three}\" })",
+      "$0"
+    ]
+  },
+  "Drop-down": {
+    "prefix": "lk-dropdown",
+    "description": "A combo box and what happens when an item is picked.",
+    "body": [
+      "local ${1:choice} = ui.ComboBox()",
+      "${1:choice}:setItems({ \"${2:One}\", \"${3:Two}\" })",
+      "${1:choice}:setOnItemSelect(function(_, index)",
+      "    $0",
+      "end)"
+    ]
+  },
+  "Message": {
+    "prefix": "lk-alert",
+    "description": "Show a message in a dialog.",
+    "body": [
+      "ui.Dialogs.info(${1:window}, \"${2:Title}\", \"${3:Message}\")$0"
+    ]
+  },
+  "Timer": {
+    "prefix": "lk-timer",
+    "description": "Run something once, after a delay in milliseconds.",
+    "body": [
+      "sys.Timer.singleShot(${1:1000}, function()",
+      "    $0",
+      "end)"
+    ]
+  }
+}
