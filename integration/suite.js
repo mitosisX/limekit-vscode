@@ -37,7 +37,7 @@ exports.run = async () => {
     const config = vscode.workspace.getConfiguration("limekit");
     const main = path.join(project, "scripts", "main.lua");
     await vscode.window.showTextDocument(await vscode.workspace.openTextDocument(main));
-    await vscode.extensions.getExtension("navetotech.limekit").activate();
+    await vscode.extensions.getExtension("OmegaMsiska.limekit").activate();
 
     await check("the Run command exists", async () => {
         const commands = await vscode.commands.getCommands(true);

@@ -3,7 +3,7 @@
   "displayName": "Limekit",
   "description": "Run Limekit desktop apps from VS Code with one click, with completion and docs for the whole Limekit Lua API.",
   "version": "0.1.0",
-  "publisher": "navetotech",
+  "publisher": "OmegaMsiska",
   "license": "GPL-3.0-only",
   "icon": "images/icon.png",
   "repository": {
